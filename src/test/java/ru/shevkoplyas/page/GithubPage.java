@@ -1,9 +1,9 @@
-package ru.shevkoplyas.page.page;
+package ru.shevkoplyas.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import ru.shevkoplyas.page.TestBase;
-import ru.shevkoplyas.page.domain.NavigationItem;
+import ru.shevkoplyas.TestBase;
+import ru.shevkoplyas.domain.NavigationItem;
 
 
 import static com.codeborne.selenide.Selenide.$;

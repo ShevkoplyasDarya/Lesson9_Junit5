@@ -1,4 +1,4 @@
-package ru.shevkoplyas.page.domain;
+package ru.shevkoplyas.domain;
 
 public enum NavigationItem {
            OVERVIEW("Overview"),
