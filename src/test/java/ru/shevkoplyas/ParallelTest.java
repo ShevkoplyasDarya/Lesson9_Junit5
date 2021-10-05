@@ -1,4 +1,4 @@
-package ru.shevkoplyas.page;
+package ru.shevkoplyas;
 
 
 import org.junit.jupiter.api.DisplayName;
@@ -8,8 +8,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
-import ru.shevkoplyas.page.domain.NavigationItem;
-import ru.shevkoplyas.page.page.GithubPage;
+import ru.shevkoplyas.domain.NavigationItem;
+import ru.shevkoplyas.page.GithubPage;
 
 import java.util.stream.Stream;
 

@@ -1,4 +1,4 @@
-package ru.shevkoplyas.page;
+package ru.shevkoplyas;
 
 import org.junit.jupiter.api.BeforeAll;
 import com.codeborne.selenide.Configuration;
