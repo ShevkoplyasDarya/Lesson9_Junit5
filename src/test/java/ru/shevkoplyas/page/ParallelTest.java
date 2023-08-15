@@ -18,17 +18,29 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class ParallelTest {
 
-    private GithubPage githubPage = new GithubPage();
+    private final GithubPage githubPage = new GithubPage();
+
+    static Stream<Arguments> checkNavigationBarItems() {
+        return Stream.of(
+                Arguments.of("Overview"),
+                Arguments.of("Repositories"),
+                Arguments.of("Projects"),
+                Arguments.of("Packages"),
+                Arguments.of("Stars")
+
+        );
+    }
 
     @CsvSource({
             "Overview",
             "Repositories",
             "Projects",
-            "Packages"
+            "Packages",
+            "Stars"
     })
 
-    @DisplayName("Check navigation bar ob Github Profile with CsvSource")
-    @ParameterizedTest(name = "Check dispalyed tabs in github Profile with CsvSource: {0} tab")
+    @DisplayName("Check navigation bar of Github Profile with CsvSource")
+    @ParameterizedTest(name = "Check that {0} tab is displayed in Github Profile")
     void testForGithubProfile(String navigationItems, TestInfo testInfo) {
         open(GithubPage.URL);
         githubPage.checkNavigationBar(navigationItems);
@@ -37,52 +49,45 @@ public class ParallelTest {
     }
 
     @EnumSource(NavigationItem.class)
-    @DisplayName("Check navigation bar ob Github Profile with EnumSource")
-    @ParameterizedTest(name = "Check dispalyed tabs in github Profile with EnumSource: {0} tab")
+    @DisplayName("Check navigation bar of Github Profile with EnumSource")
+    @ParameterizedTest(name = "Check switching to {0} tab in Github Profile")
     void test2ForGithubProfile(NavigationItem navigationItem, TestInfo testInfo) {
         open(GithubPage.URL);
         githubPage.switchToNavigationItem(navigationItem);
+        githubPage.checkOpenedTab(navigationItem);
         System.out.println("Executed test: "
                 + testInfo.getDisplayName());
 
     }
 
     @EnumSource(value = NavigationItem.class, names = {"OVERVIEW", "REPOSITORIES"})
-    @DisplayName("Check navigation bar ob Github Profile with EnumSource and required values")
-    @ParameterizedTest(name = "Check dispalyed tabs in github Profile with EnumSource and required values: {0} tab")
+    @DisplayName("Check navigation bar of Github Profile with EnumSource and required values")
+    @ParameterizedTest(name = "Check switching to required {0} tab in Github Profile")
     void testForGithubProfileWithSelectedValues(NavigationItem navigationItem, TestInfo testInfo) {
         open(GithubPage.URL);
         githubPage.switchToNavigationItem(navigationItem);
+        githubPage.checkOpenedTab(navigationItem);
         System.out.println("Executed test: "
                 + testInfo.getDisplayName());
 
     }
 
     @EnumSource(value = NavigationItem.class, names = {"PACKAGES"}, mode = EnumSource.Mode.EXCLUDE)
-    @DisplayName("Check navigation bar ob Github Profile with EnumSource and excluded values")
+    @DisplayName("Check navigation bar of Github Profile with EnumSource and excluded value ")
     @ParameterizedTest
-            (name = "Check dispalyed tabs in github Profile with EnumSource and excluded values: {0} tab name")
+            (name = "Check switching to {0} tab in Github Profile (value excluded)")
     void testForGithubProfileWithExcludedValues(NavigationItem navigationItem, TestInfo testInfo) {
         open(GithubPage.URL);
         githubPage.switchToNavigationItem(navigationItem);
+        githubPage.checkOpenedTab(navigationItem);
         System.out.println("Executed test: "
                 + testInfo.getDisplayName());
 
     }
 
-    static Stream<Arguments> checkNavigationBarItems() {
-        return Stream.of(
-                Arguments.of("Overview"),
-                Arguments.of("Repositories"),
-                Arguments.of("Projects"),
-                Arguments.of("Packages")
-
-        );
-    }
-
     @MethodSource("checkNavigationBarItems")
     @DisplayName("Check navigation bar ob Github Profile with MethodSource")
-    @ParameterizedTest(name = "Check dispalyed tabs in github Profile with MethodSource: {0} tab")
+    @ParameterizedTest(name = "Check that {0} tab is displayed in Github Profile")
     void checkNavigationBarItems(String barItem, TestInfo testInfo) {
         open(GithubPage.URL);
         githubPage.checkNavigationBar(barItem);
